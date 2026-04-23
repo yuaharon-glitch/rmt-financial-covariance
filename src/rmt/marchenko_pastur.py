@@ -19,11 +19,9 @@ class MarchenkoPastur:
     """
 
     def lambda_plus(self, sigma: float, q: float) -> float:
-        # lambda_+ = sigma^2 * (1 + sqrt(q))^2
         return float(sigma**2 * (1.0 + np.sqrt(q)) ** 2)
 
     def lambda_minus(self, sigma: float, q: float) -> float:
-        # lambda_- = sigma^2 * (1 - sqrt(q))^2
         return float(sigma**2 * (1.0 - np.sqrt(q)) ** 2)
 
     def pdf(self, x: np.ndarray, sigma: float, q: float) -> np.ndarray:
@@ -65,7 +63,6 @@ class MarchenkoPastur:
         return float(np.clip(result, 0.0, 1.0))
 
     def _mp_cdf_vec(self, x_arr: np.ndarray, sigma: float, q: float) -> np.ndarray:
-        # kstest passes the full array at once, so we need this wrapper
         return np.array([self._mp_cdf_scalar(float(xi), sigma, q) for xi in x_arr])
 
     def fit(self, eigenvalues: np.ndarray, q: float) -> "MarchenkoPastur":
